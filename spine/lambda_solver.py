@@ -1,11 +1,15 @@
 def pass_test():
     raise NotImplementedError
 
-def pass_performance():
+def pass_complexity():
     raise NotImplementedError
 
-def parse_problems(problems):
+def parse_into_trees(problems):
     """
+    Returns
+        #    Dependency
+        #
+        #Input         Output
     """
     input = 0
     output = 0
@@ -13,7 +17,7 @@ def parse_problems(problems):
 
     return input, output, dependencies
 
-def build_from_template(function_template, dependencies):
+def specify_template(function_template, dependencies):
     pass
 
 def pick_function_template():
@@ -23,16 +27,26 @@ def abstract_data():
     pass
 
 def compose_solution(problem,pick_function_template,abstract_data):
-    input, output, dependencies = parse_problems(problem)
-    test_passed = pass_test()
-    performance_passed = pass_performance()
-    data_structure = abstract_data(input, dependencies)
+    input, output, dependencies = parse_into_trees(problem)
+    
+    data_structure = abstract_data(input, output, dependencies)
+    function_templates =  function_template = pick_function_template(
+        data_structure, dependencies
+    )
 
-    while test_passed and performance_passed:
-        function_template = pick_function_template(data_structure, dependencies)
-        solution = build_from_template(function_template, dependencies)
+    solutions = [specify_template(func_template) 
+        for func_template in function_templates
+    ]
+    judged_solutions = {s:[pass_test(s), pass_complexity(s)] 
+        for s in solutions
+    }
+    
+    passed_solutions = []
+    for key, value in judged_solutions.items():
+        if value == [True, True]:
+            passed_solutions.append(key)
 
-    return solution
+    return passed_solutions
     
 if __name__ == "__main__":
     problem = "Two Sum"
