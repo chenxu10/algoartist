@@ -1,21 +1,10 @@
+from parseproblems import parse_into_trees
+
 def pass_test():
     raise NotImplementedError
 
 def pass_complexity():
     raise NotImplementedError
-
-def parse_into_trees(problems):
-    """
-    Returns
-        #    Dependency
-        #
-        #Input         Output
-    """
-    input = 0
-    output = 0
-    dependencies = 0
-
-    return input, output, dependencies
 
 def specify_template(function_template, dependencies):
     pass
@@ -49,14 +38,21 @@ def compose_solution(problem,pick_function_template,abstract_data):
     return passed_solutions
     
 if __name__ == "__main__":
-    problem = "Two Sum"
-    soltuion = compose_solution(
-        problem=problem, 
-        pick_function_template=pick_function_template, 
-        abstract_data=abstract_data
-    )
+    TwoSum = """
+      Given an array of integers nums and an integer target, 
+      return indices of the two numbers 
+      such that they add up to target.
+    """
+    problem = TwoSum
+    a = parse_into_trees(problem)
+    print(a[2][-1])
+    # soltuion = compose_solution(
+    #     problem=problem, 
+    #     pick_function_template=pick_function_template, 
+    #     abstract_data=abstract_data
+    # )
 
-
-
-
+    # TODO:
+    # refine regex example
+    # set up python packaging
 
